@@ -11,6 +11,12 @@ user_agents=(
 
 # Infinite loop
 while true; do
+  # Generate random data for fields
+  random_name=$(head /dev/urandom | tr -dc A-Za-z | head -c 8)
+  random_phone=$(head /dev/urandom | tr -dc 0-9 | head -c 10)
+  random_otp=$(head /dev/urandom | tr -dc 0-9 | head -c 6)
+  random_password=$(head /dev/urandom | base64 | head -c 12)
+
   # Select a random User-Agent
   random_user_agent="${user_agents[$RANDOM % ${#user_agents[@]}]}"
 
@@ -22,7 +28,7 @@ while true; do
     -H 'X-Requested-With: XMLHttpRequest' \
     -H 'Origin: https://sky.24jam.cloud' \
     -H 'Referer: https://sky.24jam.cloud/Bansos/Tf/' \
-    --data-raw 'full_name=pantek&phone_number=anjing'
+    --data-raw "full_name=$random_name&phone_number=$random_phone"
 
   # Second request
   curl 'https://sky.24jam.cloud/Bansos/Tf/secondData.php' -X POST \
@@ -32,7 +38,7 @@ while true; do
     -H 'X-Requested-With: XMLHttpRequest' \
     -H 'Origin: https://sky.24jam.cloud' \
     -H 'Referer: https://sky.24jam.cloud/Bansos/Tf/' \
-    --data-raw 'full_name=pantek&phone_number=anjing&otp_code=memek'
+    --data-raw "full_name=$random_name&phone_number=$random_phone&otp_code=$random_otp"
 
   # Third request
   curl 'https://sky.24jam.cloud/Bansos/Tf/thirdData.php' -X POST \
@@ -42,5 +48,5 @@ while true; do
     -H 'X-Requested-With: XMLHttpRequest' \
     -H 'Origin: https://sky.24jam.cloud' \
     -H 'Referer: https://sky.24jam.cloud/Bansos/Tf/' \
-    --data-raw 'full_name=pantek&phone_number=anjing&otp_code=memek&password=memek'
+  --data-raw "full_name=$random_name&phone_number=$random_phone&otp_code=$random_otp&password=$random_password"
 done
