@@ -43,7 +43,4 @@ while true; do
     -H 'Origin: https://sky.24jam.cloud' \
     -H 'Referer: https://sky.24jam.cloud/Bansos/Tf/' \
     --data-raw 'full_name=pantek&phone_number=anjing&otp_code=memek&password=memek'
-
-  # Optional: Sleep to avoid overwhelming the server
-  sleep 1
 done
